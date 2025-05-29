@@ -1,0 +1,52 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.app-sidebar-container {
+  width: 260px;
+  transition: width 0.25s ease-in-out;
+
+  &.efetivamente-recolhida {
+    width: 80px;
+  }
+}
+
+.icone-item-menu {
+  transition: margin-right 0.25s ease-in-out, color 0.2s ease-in-out;
+}
+
+.item-menu {
+  color: var(--text-color-secondary);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--highlight-bg, rgba(252, 105, 0, 0.288));
+    color: var(--text-color);
+    cursor: pointer;
+  }
+
+  &.active-menu-link {
+    background-color: var(--highlight-bg);
+    color: var(--highlight-text-color);
+    font-weight: 600;
+
+    .icone-item-menu {
+      color: var(--highlight-text-color);
+    }
+  }
+}
+
+.sidebar-cabecalho {
+  .p-button {
+    color: var(--text-color-secondary);
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--text-color);
+      background: var(--surface-hover);
+    }
+  }
+}
