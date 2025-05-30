@@ -50,3 +50,95 @@ body {
     }
   }
 }
+
+
+button[icon="pi pi-search"] {
+  transition: background-color 0.3s ease;
+  background-color: #D96C3E;
+  border: none;
+
+  &:hover {
+    background-color: #c85c30;
+    
+  }
+}
+
+button[icon="pi pi-times"] {
+  transition: background-color 0.3s ease;
+  background-color: #b5dfa9;
+  border: none;
+  color: #61402a;
+
+  &:hover {
+    background-color: #b5dfa9; 
+    
+  }
+}
+
+button[icon="pi pi-plus"] {
+  transition: background-color 0.3s ease;
+  background-color: #E7A84A;
+  border: none;
+  color: white;
+
+  &:hover {
+    background-color: #f1ddbf; 
+    
+  }
+}
+
+button[icon="pi pi-pencil"] {
+  transition: color 0.3s ease;
+  color: #D96C3E;
+
+  &:hover {
+    color: #f3c8b3; 
+    
+  }
+}
+
+button[icon="pi pi-trash"] {
+  transition: color 0.3s ease;
+  color: #A47148;
+
+  &:hover {
+    color: #dbbca3; 
+    
+  }
+}
+.botao-animado {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.botao-animado:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.botao-buscar {
+  background-color: #D96C3E !important;
+  border: none !important;
+  color: white !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.botao-buscar:hover {
+  background-color: #b5dfa9 !important;
+}
+.botao-buscar-custom:hover {
+  background-color: #b5dfa9 !important;
+  color: #61402a !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+button.ver-receita {
+  background-color: #D96C3E;
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: #b5dfa9;
+    color: #61402a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}

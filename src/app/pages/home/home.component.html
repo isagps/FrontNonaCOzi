@@ -1,0 +1,118 @@
+<style>
+  .botao-buscar-custom {
+    background-color: #D96C3E;
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .botao-buscar-custom:hover {
+    background-color: #b5dfa9 !important;
+    color: #61402a !important;
+  }
+
+  .p-card {
+    background-color: #F3E9DC !important;
+  }
+
+  h1, h2, h3, label {
+    color: #D96C3E;
+  }
+
+  input[pInputText] {
+    border: 1px solid #A47148;
+    background-color: white;
+    color: #5C4033;
+  }
+
+  .text-orange-700, .text-orange-900 {
+    color: #D96C3E !important;
+  }
+
+  .text-green-800 {
+    color: #A47148 !important;
+  }
+</style>
+
+<div class="grid justify-content-center mt-5">
+  <div class="col-12 md:col-10 lg:col-8">
+    <p-card class="mb-4">
+      <ng-template pTemplate="header">
+        <h1 class="text-2xl font-bold">
+          🍲 Cozinhar com amor é tradição de família
+        </h1>
+      </ng-template>
+      <p class="text-lg">
+        Bem-vindo ao <strong>NonaCozi</strong>! Aqui você encontra receitas simples, afetivas e práticas — com o sabor
+        da casa da vó.
+      </p>
+    </p-card>
+  </div>
+</div>
+
+<div class="grid justify-content-center">
+  <div class="col-12 md:col-10 lg:col-8">
+    <p-card>
+      <ng-template pTemplate="header">
+        <h2 class="m-0">Buscar receitas pelos ingredientes 🍅</h2>
+      </ng-template>
+
+      <div class="flex flex-column gap-2">
+        <input
+          type="text"
+          pInputText
+          placeholder="Digite ingredientes separados por vírgula (ex: arroz, ovo, tomate)"
+          [(ngModel)]="ingredientesBusca"
+        />
+        <button
+          pButton
+          type="button"
+          label="Buscar"
+          icon="pi pi-search"
+          (click)="buscarPorIngredientes()"
+          class="botao-buscar-custom"
+        ></button>
+      </div>
+    </p-card>
+  </div>
+</div>
+
+<div class="grid justify-content-center mt-5">
+  <div class="col-12 md:col-10">
+    <h3 class="text-center mb-3">✨ Receitas da Nona</h3>
+    <div class="grid">
+      <div class="col-12 md:col-4" *ngFor="let receita of receitasFavoritas">
+        <p-card header="{{ receita.nome }}" subheader="{{ receita.descricao }}">
+          <button
+            pButton
+            label="Ver Receita"
+            class="mt-2"
+            [routerLink]="['/receita', receita.id]"
+            style="background-color: #D96C3E; border: none; color: #fcfbfa;"
+          ></button>
+        </p-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid justify-content-center mt-5">
+  <div class="col-12 md:col-6">
+    <p-card>
+      <ng-template pTemplate="header">
+        <h2 class="m-0">Explorar Todas as Receitas</h2>
+      </ng-template>
+
+      <p>Organize, visualize e experimente suas receitas favoritas com facilidade.</p>
+
+      <div class="mt-3 flex justify-content-end">
+        <button
+          pButton
+          label="Ver Receitas"
+          class="mt-2 botao-buscar-custom botao-animado"
+          [routerLink]="['/receita']"
+        ></button>
+      </div>
+    </p-card>
+  </div>
+</div>

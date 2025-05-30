@@ -1,45 +1,52 @@
-<div class="p-m-3">
-  <h2 class="p-m-0">Receitas</h2>
+<div class="p-m-3" style="background-color: #F3E9DC; padding: 2rem;">
+  <h2 class="p-m-0 mb-4" style="color: #D96C3E;">Receitas</h2>
 
   <div class="p-d-4">
     <form [formGroup]="filterForm" (ngSubmit)="aplicarFiltro()">
       <div class="formgrid grid">
         <div class="field col-12 md:col-4">
-          <label for="filtro-nome">Nome</label>
+          <label for="filtro-nome" style="color: #A47148;">Nome</label>
           <input id="filtro-nome" type="text" pInputText formControlName="nome" placeholder="Filtrar por nome"
-            class="w-full" />
+            class="w-full" style="border: 1px solid #A47148; background-color: white; color: #5C4033;" />
         </div>
 
         <div class="field col-12 md:col-4">
-          <label for="filtro-ingrediente">Ingrediente</label>
+          <label for="filtro-ingrediente" style="color: #A47148;">Ingrediente</label>
           <input id="filtro-ingrediente" type="text" pInputText formControlName="ingrediente"
-            placeholder="Filtrar por ingrediente" class="w-full" />
+            placeholder="Filtrar por ingrediente"
+            class="w-full" style="border: 1px solid #A47148; background-color: white; color: #5C4033;" />
         </div>
 
         <div class="field col-12 md:col-4">
-          <label for="filtro-tempo">Tempo (min)</label>
+          <label for="filtro-tempo" style="color: #A47148;">Tempo (min)</label>
           <input id="filtro-tempo" type="number" pInputText formControlName="tempoPreparoMinutos"
-            placeholder="Máximo em minutos" class="w-full" />
+            placeholder="Máximo em minutos"
+            class="w-full" style="border: 1px solid #A47148; background-color: white; color: #5C4033;" />
         </div>
       </div>
 
-      <div class="flex justify-content-around flex-wrap">
-        <button pButton type="submit" icon="pi pi-search" label="Filtrar"></button>
-        <button pButton type="button" icon="pi pi-times" label="Limpar" class="p-button-secondary"
-          (click)="limparFiltro()"></button>
+      <div class="flex justify-content-around flex-wrap mt-3">
+        <button pButton type="submit" icon="pi pi-search" label="Filtrar"
+          class="botao-animado"
+          style="background-color: #D96C3E; border: none;"></button>
+
+        <button pButton type="button" icon="pi pi-times" label="Limpar"
+          class="botao-animado"
+          style="background-color: #b5dfa9; border: none; color: #61402a;" (click)="limparFiltro()"></button>
       </div>
     </form>
   </div>
 
-  <hr class="m-5"/>
+  <hr class="m-5" style="border-top: 2px dashed #A47148;" />
 
-  <div class="p-d-flex p-jc-between p-ai-center p-mb-3">
+  <div>
     <button
       pButton
       type="button"
       icon="pi pi-plus"
       label="Nova Receita"
-      class="p-button-success"
+    class="botao-animado"
+     style="background-color: #D96C3E; border: none; color: #f3f2f2;"
       (click)="abrirDialogNova()"
     ></button>
   </div>
@@ -55,9 +62,10 @@
     [currentPageReportTemplate]="'Página {currentPage} de {totalPages}'"
     (onLazyLoad)="mudarPagina($event)"
     class="p-mb-3"
+    styleClass="custom-table"
   >
     <ng-template pTemplate="header">
-      <tr>
+      <tr style="background-color: #A47148; color: white;">
         <th scope="col">Nome</th>
         <th scope="col">Descrição</th>
         <th scope="col" style="width: 10rem">Ações</th>
@@ -72,14 +80,17 @@
             pButton
             type="button"
             icon="pi pi-pencil"
-            class="p-button-text p-mr-2"
+            class="p-button-text p-mr-2 botao-animado"
+            style="color: #D96C3E;"
             (click)="editarReceita(r)"
           ></button>
+
           <button
             pButton
             type="button"
             icon="pi pi-trash"
-            class="p-button-text p-button-danger"
+            class="p-button-text botao-animado"
+            style="color: #A47148;"
             (click)="excluirReceita(r.id!)"
           ></button>
         </td>
@@ -92,46 +103,12 @@
     [(visible)]="dialogAberto"
     [modal]="true"
     [closable]="false"
-    [style]="{ width: '400px' }"
+    [style]="{ width: '600px' }"
   >
-    <div class="p-fluid">
-      <div class="p-field p-mb-2">
-        <label for="nome">Nome</label>
-        <input
-          id="nome"
-          type="text"
-          pInputText
-          [(ngModel)]="receitaEditando.nome"
-          name="nome"
-          required
-        />
-      </div>
-      <div class="p-field p-mb-4">
-        <label for="descricao">Descrição</label>
-        <textarea
-          id="descricao"
-          rows="3"
-          pInputTextarea
-          [(ngModel)]="receitaEditando.descricao"
-          name="descricao"
-        ></textarea>
-      </div>
-      <div class="p-d-flex p-jc-end p-ai-center">
-        <button
-          pButton
-          type="button"
-          label="Cancelar"
-          class="p-button-text p-mr-2"
-          (click)="dialogAberto = false"
-        ></button>
-        <button
-          pButton
-          type="button"
-          label="Salvar"
-          class="p-button-primary"
-          (click)="salvar()"
-        ></button>
-      </div>
-    </div>
+    <app-formulario-receita
+      [receita]="receitaEditando"
+      (salvar)="salvar()"
+      (cancelar)="dialogAberto = false"
+    />
   </p-dialog>
 </div>

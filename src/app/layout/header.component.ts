@@ -8,7 +8,7 @@ import { ThemeService } from 'app/shared/services/util/theme.service';
     standalone: true,
     imports: [CommonModule, ButtonModule],
     template: `
-    <header class="bg-orange-600 text-white p-3 flex align-items-center justify-content-between">
+   <header style="background-color:rgb(167, 72, 5);" class="text-white p-3 flex align-items-center justify-content-between">
         <h1 class="text-lg font-bold m-0">🍳 NonaCozi</h1>
         <button 
             pButton

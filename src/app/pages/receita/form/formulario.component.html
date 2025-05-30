@@ -1,0 +1,49 @@
+<p-card header="Cadastro de Receita"
+  [style]="{ 'background-color': '#F3E9DC', 'border': '1px solid #A47148', 'color': '#A47148' }"
+  styleClass="shadow-4 border-round p-4">
+  <form class="p-fluid formgrid grid">
+
+    <div class="field col-12 md:col-6">
+      <label for="nome" style="color: #A47148;">Nome:</label>
+      <input pInputText id="nome" [(ngModel)]="receita.nome" name="nome" class="p-inputtext-sm w-full" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label for="descricao" style="color: #A47148;">Descrição:</label>
+      <input pInputText id="descricao" [(ngModel)]="receita.descricao" name="descricao" class="p-inputtext-sm w-full" />
+    </div>
+
+    <div class="field col-12">
+      <label for="modoPreparo" style="color: #A47148;">Modo de Preparo:</label>
+      <textarea id="modoPreparo" pInputTextarea rows="5" autoResize="true" [(ngModel)]="receita.modoPreparo"
+        name="modoPreparo" class="w-full" placeholder="Descreva como preparar a receita..."></textarea>
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label for="tempo" style="color: #A47148;">Tempo de Preparo (minutos):</label>
+      <p-autoComplete id="tempo" [(ngModel)]="receita.tempoPreparoMinutos" [suggestions]="tempos" [dropdown]="true"
+        (completeMethod)="filtrarTempos($event)" field="" placeholder="Ex: 30" name="tempo"
+        class="w-full"></p-autoComplete>
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label for="porcoes" style="color: #A47148;">Porções:</label>
+      <p-autoComplete id="porcoes" [(ngModel)]="receita.porcoes" [suggestions]="porcoes" [dropdown]="true"
+        (completeMethod)="filtrarPorcoes($event)" field="" placeholder="Ex: 4" name="porcoes"
+        class="w-full"></p-autoComplete>
+    </div>
+
+    <div class="field col-12">
+      <label for="ingredientes" style="color: #A47148;">Ingredientes:</label>
+      <p-chips inputId="ingredientes" [(ngModel)]="receita.ingredientes" name="ingredientes" separator=","
+        class="w-full" placeholder="Digite e pressione enter..."></p-chips>
+    </div>
+
+    <div class="col-12 flex justify-content-end gap-3 mt-4">
+      <button pButton label="Cancelar" icon="pi pi-times" class="p-button-outlined"
+        style="border-color: #b5dfa9; color: #61402a;" (click)="cancelar.emit()"></button>
+      <button pButton label="Salvar" icon="pi pi-check" iconPos="right" class="p-button-outlined"
+        style="border-color: #D96C3E; color: #e7620a;" type="submit" (click)="salvar.emit()"></button>
+    </div>
+  </form>
+</p-card>

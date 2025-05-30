@@ -7,7 +7,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { FormularioReceitaComponent } from './form/formulario.component';
 import { ReceitaService } from 'app/shared/services/api/receita.service';
 import { ReceitaCriarRequest, ReceitaAtualizarRequest, ReceitaResponse, ReceitaFiltroRequest } from 'app/shared/interface/receita.interface';
 import { AlertService } from 'app/shared/services/util/alert.service';
@@ -23,13 +23,14 @@ import { AlertService } from 'app/shared/services/util/alert.service';
     DialogModule,
     FormsModule,
     InputTextModule,
+    FormularioReceitaComponent,
     TableModule,
     ToastModule,
   ],
   templateUrl: './receitas.page.html',
 })
 export class ReceitasPage implements OnInit {
-  receitas: ReceitaResponse[] = [];
+receitas: ReceitaResponse[] = [];
   totalRegistros = 0;
   pagina = 0;
   tamanhoPagina = 10;
@@ -40,6 +41,8 @@ export class ReceitasPage implements OnInit {
   idEditando?: number;
 
   filterForm: FormGroup;
+
+
 
   constructor(
     private readonly receitaService: ReceitaService,

@@ -43,3 +43,6 @@ export class ReceitaService {
     return this.http.delete(`${this.api}/${id}`);
   }
 }
+
+export type { ReceitaResponse };
+
