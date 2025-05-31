@@ -1,117 +1,80 @@
-<style>
-  .botao-buscar-custom {
-    background-color: #D96C3E;
-    border: none;
-    color: white;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  .botao-buscar-custom:hover {
-    background-color: #b5dfa9 !important;
-    color: #61402a !important;
-  }
-
-  .p-card {
-    background-color: #F3E9DC !important;
-  }
-
-  h1, h2, h3, label {
-    color: #D96C3E;
-  }
-
-  input[pInputText] {
-    border: 1px solid #A47148;
-    background-color: white;
-    color: #5C4033;
-  }
-
-  .text-orange-700, .text-orange-900 {
-    color: #D96C3E !important;
-  }
-
-  .text-green-800 {
-    color: #A47148 !important;
-  }
-</style>
-
-<div class="grid justify-content-center mt-5">
+<div class="grid justify-content-center mt-5" style="background-color: #F3E9DC; padding: 2rem;">
   <div class="col-12 md:col-10 lg:col-8">
-    <p-card class="mb-4">
-      <ng-template pTemplate="header">
-        <h1 class="text-2xl font-bold">
+    <p-card class="mb-4" [style.background-color]="'white'"> <ng-template pTemplate="header">
+        <h1 class="text-2xl font-bold" style="color: #A47148;">
           🍲 Cozinhar com amor é tradição de família
         </h1>
       </ng-template>
-      <p class="text-lg">
+      <p class="text-lg mb-4" style="color: #5C4033;">
         Bem-vindo ao <strong>NonaCozi</strong>! Aqui você encontra receitas simples, afetivas e práticas — com o sabor
         da casa da vó.
       </p>
-    </p-card>
-  </div>
-</div>
-
-<div class="grid justify-content-center">
-  <div class="col-12 md:col-10 lg:col-8">
-    <p-card>
-      <ng-template pTemplate="header">
-        <h2 class="m-0">Buscar receitas pelos ingredientes 🍅</h2>
-      </ng-template>
-
-      <div class="flex flex-column gap-2">
-        <input
-          type="text"
-          pInputText
-          placeholder="Digite ingredientes separados por vírgula (ex: arroz, ovo, tomate)"
-          [(ngModel)]="ingredientesBusca"
-        />
-        <button
-          pButton
-          type="button"
-          label="Buscar"
-          icon="pi pi-search"
-          (click)="buscarPorIngredientes()"
-          class="botao-buscar-custom"
-        ></button>
+      <hr class="my-4" style="border-top: 1px solid #A47148;">
+      <div>
+        <h2 class="m-0 mb-3" style="color: #A47148;">Buscar receitas pelos ingredientes 🍅</h2>
+        <div class="flex flex-column gap-3">
+          <p-autoComplete [(ngModel)]="ingredientesBuscaArray" [suggestions]="sugestoesIngredientes"
+            (completeMethod)="sugerirIngredientes($event)" placeholder="Digite os ingredientes (ex: Arroz, Ovo, Tomate)"
+            [multiple]="true" [dropdown]="false"
+            inputStyleClass="w-full" styleClass="w-full" appendTo="body"
+            [minLength]="1" emptyMessage="Nenhum ingrediente encontrado" #autoCompleteIngredientes
+            [inputStyle]="{'background-color': 'white', 'color': '#5C4033', 'border': 'none'}"
+            placeholderStyleClass="{'color': '#A47148'}">
+            <ng-template pTemplate="chip" let-value>
+              <div class="flex align-items-center"
+                style="background-color: #F3E9DC; color: #D96C3E; border: 1px solid #D96C3E; border-radius: 12px; padding: 0.25rem 0.75rem; margin: 2px;">
+                <span>{{ value }}</span>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+          <button pButton type="button" label="Buscar" icon="pi pi-search" (click)="buscarReceitas()"
+            class="botao-buscar-custom w-full md:w-auto">
+          </button>
+        </div>
       </div>
     </p-card>
   </div>
 </div>
 
-<div class="grid justify-content-center mt-5">
-  <div class="col-12 md:col-10">
-    <h3 class="text-center mb-3">✨ Receitas da Nona</h3>
+<div class="grid justify-content-center" style="background-color: #F3E9DC; padding: 2rem;">
+  <div class="col-12 md:col-10 lg:col-11 xl:col-10">
+    <h3 class="text-center mb-4 text-2xl" style="color: #A47148;">✨ Favoritas da Nona</h3>
     <div class="grid">
-      <div class="col-12 md:col-4" *ngFor="let receita of receitasFavoritas">
-        <p-card header="{{ receita.nome }}" subheader="{{ receita.descricao }}">
-          <button
-            pButton
-            label="Ver Receita"
-            class="mt-2"
-            [routerLink]="['/receita', receita.id]"
-            style="background-color: #D96C3E; border: none; color: #fcfbfa;"
-          ></button>
+      <div class="col-12 md:col-6 lg:col-4 p-2 flex align-items-stretch" *ngFor="let receita of receitasFavoritas">
+        <p-card styleClass="w-full" [style.background-color]="'white'"> <ng-template pTemplate="header">
+            <img alt="Foto de {{ receita.nome }}" [src]="receita.imagemUrl"
+              (error)="receita.imagemUrl = 'assets/images/placeholder.png'" class="card-receita-imagem" />
+          </ng-template>
+          <ng-template pTemplate="title">
+            <div class="text-xl font-semibold" style="color: #D96C3E;">
+              {{ receita.nome }}
+            </div>
+          </ng-template>
+          <ng-template pTemplate="subtitle">
+            <span style="color: #5C4033;">{{ receita.descricao }}</span>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <button pButton type="button" label="Ver Receita" class="p-button-sm w-full ver-receita botao-animado"
+              [routerLink]="['/receita', receita.id]">
+            </button>
+          </ng-template>
         </p-card>
       </div>
     </div>
   </div>
 </div>
 
-<div class="grid justify-content-center mt-5">
+<div class="grid justify-content-center" style="background-color: #F3E9DC; padding: 2rem;">
   <div class="col-12 md:col-6">
-    <p-card>
-      <ng-template pTemplate="header">
-        <h2 class="m-0">Explorar Todas as Receitas</h2>
+    <p-card [style.background-color]="'white'"> <ng-template pTemplate="header">
+        <h2 class="m-0" style="color: #A47148;">Explorar Todas as Receitas</h2>
       </ng-template>
-
-      <p>Organize, visualize e experimente suas receitas favoritas com facilidade.</p>
-
+      <p style="color: #5C4033;">
+        Organize, visualize e experimente suas receitas favoritas com facilidade.
+      </p>
       <div class="mt-3 flex justify-content-end">
-        <button
-          pButton
-          label="Ver Receitas"
-          class="mt-2 botao-buscar-custom botao-animado"
-          [routerLink]="['/receita']"
-        ></button>
+        <button pButton label="Ver Receitas" class="mt-2 botao-buscar-custom botao-animado" [routerLink]="['/receita']">
+        </button>
       </div>
     </p-card>
   </div>
